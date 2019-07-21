@@ -21,7 +21,12 @@ namespace Geekbrains
 			IsActive = true;
 		}
 
-		public virtual void Off()
+        public virtual void On(BaseObjectScene obj, BaseObjectScene obj2)
+        {
+            IsActive = true;
+        }
+
+        public virtual void Off()
 		{
 			IsActive = false;
 		}

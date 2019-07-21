@@ -8,8 +8,11 @@ namespace Geekbrains
 		private KeyCode _activeFlashLight = KeyCode.F;
 		private KeyCode _cancel = KeyCode.Escape;
 		private KeyCode _reloadClip = KeyCode.R;
+        private int WeapinIndex = 0;
+       
 
-		public InputController()
+
+        public InputController()
 		{
 			Cursor.lockState = CursorLockMode.Locked;
 		}
@@ -17,18 +20,37 @@ namespace Geekbrains
 		public void OnUpdate()
 		{
 			if (!IsActive) return;
-			if (Input.GetKeyDown(_activeFlashLight))
+
+            float mw = Input.GetAxis("Mouse ScrollWheel");
+
+            if (Input.GetKeyDown(_activeFlashLight))
 			{
 				Main.Instance.FlashLightController.Switch();
 			}
-			// реализовать выбор оружия по колесику мыши
+            // реализовать выбор оружия по колесику мыши
 
-			if (Input.GetKeyDown(KeyCode.Alpha1))
+            if (mw>0)
+            {
+                SelectWeapon(++WeapinIndex);
+            }
+            else if(mw < 0)
+            {
+                SelectWeapon(--WeapinIndex);
+            }
+
+            if (Input.GetKeyDown(KeyCode.Alpha1))
 			{
-				SelectWeapon(0);
+                WeapinIndex = 0;
+                SelectWeapon(WeapinIndex);
 			}
 
-			if (Input.GetKeyDown(_cancel))
+            if (Input.GetKeyDown(KeyCode.Alpha2))
+            {
+                WeapinIndex = 1;
+                SelectWeapon(WeapinIndex);
+            }
+
+            if (Input.GetKeyDown(_cancel))
 			{
 				Main.Instance.WeaponController.Off();
 				Main.Instance.FlashLightController.Off();

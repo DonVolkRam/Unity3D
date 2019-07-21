@@ -18,7 +18,14 @@ namespace Geekbrains
 
 		public static Main Instance { get; private set; }
 
-		private void Awake()
+        public enum MouseButton
+        {
+            LeftButton,
+            RightButton,
+            CenterButton
+        }
+
+        private void Awake()
 		{
 			Instance = this;
 
@@ -52,7 +59,9 @@ namespace Geekbrains
 			FlashLightController.OnStart();
 			PlayerController.On();
 			InputController.On();
-		}
+            //WeaponController.On();
+
+        }
 
 		private void Update()
 		{
